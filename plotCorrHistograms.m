@@ -83,16 +83,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         set(gca,'Xlim',[0.97 1]);
     else
         title('\fontsize{10}B_{z}');
+        text(0.6125,80,'(a)');
         if (strcmp(strSuffix,'-sw')||strcmp(strSuffix,'-msh'))
-            set(gca,'YLim',[0 50],'Layer','top');
+            set(gca,'YLim',[0 100],'Layer','top');
             set(gca,'Xlim',[0.6 1]);
         end;
         if (strcmp(strSuffix,'-msh'))
-            set(gca,'YLim',[0 40],'Layer','top');
+            set(gca,'YLim',[0 100],'Layer','top');
             set(gca,'Xlim',[0.6 1]);
         end;
         if (strcmp(strSuffix,'-msph'))
-            set(gca,'YLim',[0 40],'Layer','top');
+            set(gca,'YLim',[0 100],'Layer','top');
             set(gca,'Xlim',[0.6 1]);
         end;
     end;   
@@ -118,8 +119,8 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
             set(gca,'YLim',[0 70],'Layer','top');
             set(gca,'Xlim',[-20 10]);    
         else
-            title('\fontsize{10}B_z from OMNIWeb and Cluster SC3');
-            set(gca,'YLim',[0 50],'Layer','top');
+            title('\fontsize{10}B_z from OMNIWeb and Cluster SC3');           
+            set(gca,'YLim',[0 100],'Layer','top');
             set(gca,'Xlim',[-5 15]);
         end;
     else
@@ -129,16 +130,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
             set(gca,'Xlim',[-20 10]);
         else
             title('\fontsize{10}B_z');
+            text(-14,80,'(b)');
             if (strcmp(strSuffix,'-sw'))
                 set(gca,'YLim',[0 100],'Layer','top');        
-                set(gca,'Xlim',[-5 15]);
+                set(gca,'Xlim',[-15 15]);                
             end;
             if (strcmp(strSuffix,'-msh'))
-                 set(gca,'YLim',[0 80],'Layer','top');        
-                 set(gca,'Xlim',[-10 5]);
+                 set(gca,'YLim',[0 100],'Layer','top');        
+                 set(gca,'Xlim',[-15 15]);                
             end;
             if (strcmp(strSuffix,'-msph'))
-                 set(gca,'YLim',[0 70],'Layer','top');        
+                 set(gca,'YLim',[0 100],'Layer','top');        
                  set(gca,'Xlim',[-10 5]);
             end;
         end;
@@ -159,16 +161,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         bar(Svc+0.05,floor(Snc/sum(Snc)*100),'FaceColor','k',...
             'EdgeColor','w');           
         title('\fontsize{10}V_{x}');
+        text(0.6125,80,'(c)'); 
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');
-             set(gca,'Xlim',[0.6 1]);    
+             set(gca,'Xlim',[0.6 1]);             
         end;
         if (strcmp(strSuffix,'-msh'))
              set(gca,'YLim',[0 100],'Layer','top');
              set(gca,'Xlim',[0.6 1]);
         end;
         if (strcmp(strSuffix,'-msph'))
-             set(gca,'YLim',[0 40],'Layer','top');
+             set(gca,'YLim',[0 100],'Layer','top');
              set(gca,'Xlim',[0.6 1]);
         end;
         set(gca,'FontSize',10);
@@ -184,16 +187,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         bar(Svt+2.5,floor(Snt/sum(Snt)*100),'FaceColor','k',...
             'EdgeColor','w');                
         title('\fontsize{10}V_x');
+        text(-14,80,'(d)');
         if (strcmp(strSuffix,'-sw'))
-             set(gca,'YLim',[0 50],'Layer','top');        
-             set(gca,'Xlim',[-5 15]);
+             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'Xlim',[-15 15]);             
         end;
         if (strcmp(strSuffix,'-msh'))
-             set(gca,'YLim',[0 20],'Layer','top');        
-             set(gca,'Xlim',[-20 10]);
+             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'Xlim',[-15 15]);             
         end;
         if (strcmp(strSuffix,'-msph'))
-             set(gca,'YLim',[0 60],'Layer','top');        
+             set(gca,'YLim',[0 100],'Layer','top');        
              set(gca,'Xlim',[-10 5]);
         end;
         set(gca,'FontSize',10);
@@ -208,16 +212,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         bar(Svc+0.05,floor(Snc/sum(Snc)*100),'FaceColor','k',...
             'EdgeColor','w');           
         title('\fontsize{10}n_{CIS}');
+        text(0.6125,80,'(e)');
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');
-             set(gca,'Xlim',[0.6 1]);     
+             set(gca,'Xlim',[0.6 1]);              
         end;
         if (strcmp(strSuffix,'-msh'))
               set(gca,'YLim',[0 100],'Layer','top');
               set(gca,'Xlim',[0.6 1]);  
         end;
         if (strcmp(strSuffix,'-msph'))
-             set(gca,'YLim',[0 40],'Layer','top');
+             set(gca,'YLim',[0 100],'Layer','top');
              set(gca,'Xlim',[0.6 1]);  
         end;
         xlabel('Correlation coefficients');
@@ -235,16 +240,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         bar(Svt+2.5,floor(Snt/sum(Snt)*100),'FaceColor','k',...
             'EdgeColor','w');                
         title('\fontsize{10}n_{CIS}');
+        text(-14,80,'(f)');
         if (strcmp(strSuffix,'-sw'))
-             set(gca,'YLim',[0 40],'Layer','top');        
-             set(gca,'Xlim',[-5 15]);
+             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'Xlim',[-15 15]);
         end;
         if (strcmp(strSuffix,'-msh'))
-             set(gca,'YLim',[0 30],'Layer','top');        
+             set(gca,'YLim',[0 100],'Layer','top');        
              set(gca,'Xlim',[-15 15]);
         end;
         if (strcmp(strSuffix,'-msph'))
-             set(gca,'YLim',[0 20],'Layer','top');        
+             set(gca,'YLim',[0 100],'Layer','top');        
              set(gca,'Xlim',[-5 15]);
         end;
         set(gca,'FontSize',10);
@@ -259,16 +265,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         bar(Svc+0.05,floor(Snc/sum(Snc)*100),'FaceColor','k',...
             'EdgeColor','w');           
         title('\fontsize{10}n_{EFW}');
+        text(0.6125,80,'(g)');
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');
-             set(gca,'Xlim',[0.6 1]);     
+             set(gca,'Xlim',[0.6 1]);             
         end;
         if (strcmp(strSuffix,'-msh'))
               set(gca,'YLim',[0 100],'Layer','top');
               set(gca,'Xlim',[0.6 1]);  
         end;
         if (strcmp(strSuffix,'-msph'))
-              set(gca,'YLim',[0 40],'Layer','top');
+              set(gca,'YLim',[0 100],'Layer','top');
               set(gca,'Xlim',[0.6 1]);  
         end;
         xlabel('Correlation coefficients');
@@ -286,16 +293,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         bar(Svt+2.5,floor(Snt/sum(Snt)*100),'FaceColor','k',...
             'EdgeColor','w');                
         title('\fontsize{10}n_{EFW}');
+        text(-14,80,'(h)');
         if (strcmp(strSuffix,'-sw'))
-             set(gca,'YLim',[0 20],'Layer','top');        
-             set(gca,'Xlim',[-5 15]);
+             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'Xlim',[-15 15]);            
         end;
         if (strcmp(strSuffix,'-msh'))
-             set(gca,'YLim',[0 40],'Layer','top');        
-             set(gca,'Xlim',[-15 10]);
+             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'Xlim',[-15 15]);
         end;
         if (strcmp(strSuffix,'-msph'))
-             set(gca,'YLim',[0 30],'Layer','top');        
+             set(gca,'YLim',[0 100],'Layer','top');        
              set(gca,'Xlim',[-20 10]);
         end;
         set(gca,'FontSize',10);
