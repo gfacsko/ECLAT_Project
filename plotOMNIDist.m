@@ -32,6 +32,7 @@ function [ error ] = plotOMNIDist()
         'EdgeColor','w');       
     title('\fontsize{10}B_{x} from OMNIWeb');
     ylabel('Ratio [%]');
+    text(0.05,0.85,'(a)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10);   
@@ -44,6 +45,7 @@ function [ error ] = plotOMNIDist()
         'EdgeColor','w');       
     title('\fontsize{10}B_{y} from OMNIWeb');
     %ylabel('Ratio [%]');
+    text(0.05,0.85,'(b)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
@@ -56,6 +58,7 @@ function [ error ] = plotOMNIDist()
         'EdgeColor','w');       
     title('\fontsize{10}B_{z} from OMNIWeb');
     %ylabel('Ratio [%]');
+    text(0.05,0.85,'(c)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10);  
@@ -68,6 +71,7 @@ function [ error ] = plotOMNIDist()
         'EdgeColor','w');       
     title('\fontsize{10}V_{x} from OMNIWeb');
     ylabel('Ratio [%]');
+    text(0.05,0.85,'(d)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10);   
@@ -79,6 +83,7 @@ function [ error ] = plotOMNIDist()
         'EdgeColor','w');       
     title('\fontsize{10}V_{y} from OMNIWeb');
     %ylabel('Ratio [%]');
+    text(0.05,0.85,'(e)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10); 
@@ -90,6 +95,7 @@ function [ error ] = plotOMNIDist()
         'EdgeColor','w');       
     title('\fontsize{10}V_{z} from OMNIWeb');
     %ylabel('Ratio [%]');
+    text(0.05,0.85,'(f)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10);  
@@ -100,8 +106,9 @@ function [ error ] = plotOMNIDist()
     Snc=histc(A(:,11),Svc);
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
-    title('\fontsize{10}V_{z} from OMNIWeb');
+    title('\fontsize{10}P from OMNIWeb');
     ylabel('Ratio [%]');
+    text(0.05,0.85,'(g)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[0 10]);    
     set(gca,'FontSize',10);  

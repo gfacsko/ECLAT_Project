@@ -61,8 +61,8 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     title('\fontsize{10}B_{x} from OMNIWeb');
-    ylabel('\fontsize{10}B_{z}');
-    text(-9, 80,'(a)');
+    ylabel('\fontsize{10}B_{z}');   
+    text(0.05,0.8,'(a)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10);   
@@ -72,17 +72,16 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     title('\fontsize{10}B_{y} from OMNIWeb');
-    set(gca,'YLim',[0 100],'Layer','top');
-    
+    set(gca,'YLim',[0 100],'Layer','top');    
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
-    text(-9, 80,'(b)');
+    text(0.05,0.8,'(b)','Units','Normalized');
     subplot(4,3,3);    
     Snc=histc(omniBz(find(~boolBz)),Svc);
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     title('\fontsize{10}B_{z} from OMNIWeb');
-    text(-9, 80,'(c)');
+    text(0.05,0.8,'(c)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
@@ -91,7 +90,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     Snc=histc(omniBx(find(~boolVx)),Svc);
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
-    text(-9, 80,'(d)');
+    text(0.05,0.8,'(d)','Units','Normalized');
     %title('\fontsize{10}V_{x} from OMNIWeb');
     ylabel('\fontsize{10}V_{x}');
     set(gca,'YLim',[0 100],'Layer','top');
@@ -103,7 +102,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     %title('\fontsize{10}V_{y} from OMNIWeb');
-    text(-9, 80,'(e)');
+    text(0.05,0.8,'(e)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
@@ -113,7 +112,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     %title('\fontsize{10}V_{z} from OMNIWeb');
-    text(-9, 80,'(f)');
+    text(0.05,0.8,'(f)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
@@ -124,7 +123,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     %title('\fontsize{10}V_{x} from OMNIWeb');
     ylabel('\fontsize{10}n_{CIS}');
-    text(-9, 80,'(g)');
+    text(0.05,0.8,'(g)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10);   
@@ -134,7 +133,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     %title('\fontsize{10}V_{y} from OMNIWeb');
-    text(-9, 80,'(h)');
+    text(0.05,0.8,'(h)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
@@ -144,7 +143,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     %title('\fontsize{10}V_{z} from OMNIWeb');
-    text(-9, 80,'(i)');
+    text(0.05,0.8,'(i)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
@@ -156,7 +155,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     %title('\fontsize{10}V_{x} from OMNIWeb');    
     xlabel('\fontsize{10}B_{x} [nT]');
     ylabel('\fontsize{10}n_{EFW}');
-    text(-9, 80,'(j)');
+    text(0.05,0.8,'(j)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10);   
@@ -167,7 +166,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     %title('\fontsize{10}V_{y} from OMNIWeb');
     xlabel('\fontsize{10}B_{y} [nT]');
-    text(-9, 80,'(k)');
+    text(0.05,0.8,'(k)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
@@ -178,7 +177,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     %title('\fontsize{10}V_{z} from OMNIWeb');
     xlabel('\fontsize{10}B_{z} [nT]');
-    text(-9, 80,'(l)');
+    text(0.05,0.8,'(l)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-10 10]);    
     set(gca,'FontSize',10); 
@@ -200,7 +199,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     title('\fontsize{10}V_{x} from OMNIWeb');
     ylabel('\fontsize{10}B_{z}');
-    text(-550, 80,'(a)');
+    text(0.05,0.8,'(a)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10);   
@@ -210,7 +209,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     title('\fontsize{10}V_{y} from OMNIWeb');
-    text(-550, 80,'(b)');
+    text(0.05,0.8,'(b)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10); 
@@ -220,7 +219,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     title('\fontsize{10}V_{z} from OMNIWeb');
-    text(-550, 80,'(c)');
+    text(0.05,0.8,'(c)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10); 
@@ -231,7 +230,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     %title('\fontsize{10}V_{x} from OMNIWeb');
     ylabel('\fontsize{10}V_{x}');
-    text(-550, 80,'(d)');
+    text(0.05,0.8,'(d)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10);   
@@ -251,7 +250,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     %title('\fontsize{10}V_{z} from OMNIWeb');
-    text(-550, 80,'(f)');
+    text(0.05,0.8,'(f)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10); 
@@ -262,7 +261,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     %title('\fontsize{10}V_{x} from OMNIWeb');
     ylabel('\fontsize{10}n_{CIS}');
-    text(-550, 80,'(g)');
+    text(0.05,0.8,'(g)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10);   
@@ -272,7 +271,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     %title('\fontsize{10}V_{y} from OMNIWeb');
-    text(-550, 80,'(h)');
+    text(0.05,0.8,'(h)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10); 
@@ -282,7 +281,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),'FaceColor','k',...
         'EdgeColor','w');       
     %title('\fontsize{10}V_{z} from OMNIWeb');
-    text(-550, 80,'(i)');
+    text(0.05,0.8,'(i)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10); 
@@ -294,7 +293,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     %title('\fontsize{10}V_{x} from OMNIWeb');
     xlabel('\fontsize{10}V_{x} [km/s]');
     ylabel('\fontsize{10}n_{EFW}');
-    text(-550, 80,'(j)');
+    text(0.05,0.8,'(j)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10);   
@@ -305,7 +304,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     %title('\fontsize{10}V_{y} from OMNIWeb');
     xlabel('\fontsize{10}V_{y} [km/s]');
-    text(-550, 80,'(k)');
+    text(0.05,0.8,'(k)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10); 
@@ -316,7 +315,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     %title('\fontsize{10}V_{z} from OMNIWeb');
     xlabel('\fontsize{10}V_{z} [km/s]');
-    text(-550, 80,'(l)');
+    text(0.05,0.8,'(l)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[-600 200]);    
     set(gca,'FontSize',10); 
@@ -338,7 +337,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     title('\fontsize{10}P from OMNIWeb');
     ylabel('\fontsize{10}B_{z}');
-    text(0.75, 85,'(a)');
+    text(0.05,0.9,'(a)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[0 10]);    
     set(gca,'FontSize',10);   
@@ -349,7 +348,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     title('\fontsize{10}P from OMNIWeb');
     ylabel('\fontsize{10}V_{x}');
-    text(0.75, 85,'(b)');
+    text(0.05,0.9,'(b)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[0 10]);    
     set(gca,'FontSize',10); 
@@ -360,7 +359,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
         'EdgeColor','w');       
     xlabel('\fontsize{10}P [nPa]');
     ylabel('\fontsize{10}n_{CIS}');
-    text(0.75, 85,'(c)');
+    text(0.05,0.9,'(c)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[0 10]);    
     set(gca,'FontSize',10); 
@@ -372,7 +371,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     %title('\fontsize{10}V_{x} from OMNIWeb');
     xlabel('\fontsize{10}P [nPa]');
     ylabel('\fontsize{10}n_{EFW}');
-    text(0.75, 85,'(d)');
+    text(0.05,0.9,'(d)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
     set(gca,'Xlim',[0 10]);    
     set(gca,'FontSize',10);

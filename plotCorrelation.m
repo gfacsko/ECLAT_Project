@@ -97,14 +97,27 @@ function [ mt, mv ] = plotCorrelation(corrFilename,isOMNI,isBz,strSuffix)
 
     % Scattered plot - Bz
     subplot(2,3,4);
+%subplot(1,3,1);
     plot(A(:,2),A(:,5),'.k');
-%    axis([-400 400 -400 400]);
-      axis([10*floor(min(A(:,2))/10) 10*round(max(A(:,2))/10) ...
-          10*floor(min(A(:,5))/10) 10*round(max(A(:,5))/10)]);  
+    if (strcmp(strSuffix,'-sw')), % SW
+        axis([-20 20 -20 20]);
+        set(gca,'XTick',-20:10:20);
+        set(gca,'XTickLabel',{'-20','-10','0','10','20'});
+    end;
+    if (strcmp(strSuffix,'-msh')), % MSH
+        axis([-60 60 -60 60]);
+        set(gca,'XTick',-60:30:60);
+        set(gca,'XTickLabel',{'-60','-30','0','30','60'});
+        set(gca,'YTick',-60:30:60);
+        set(gca,'YTickLabel',{'-60','-30','0','30','60'});
+    end;
+%       axis([10*floor(min(A(:,2))/10) 10*round(max(A(:,2))/10) ...
+%           10*floor(min(A(:,5))/10) 10*round(max(A(:,5))/10)]);  
     axis square; grid on;  
     set(gca,'FontSize',10);
     xlabel('\fontsize{10}Cluster');
     ylabel('\fontsize{10}GUMICS-4');
+    text(0.05,0.9,'(a)','Units','Normalized');
     % y=x
     hold on;
     plot([-1500,1500],[-1500,1500],'--r');
@@ -112,34 +125,39 @@ function [ mt, mv ] = plotCorrelation(corrFilename,isOMNI,isBz,strSuffix)
     
     % Scattered plot - Vx
     subplot(2,3,5);
+% subplot(1,3,2);
     plot(A(:,3),A(:,6),'.k');
-%    axis([-800 800 -800 800]);
-      axis([50*floor(min(A(:,3))/50) 50*round(max(A(:,3))/50) ...
-           50*floor(min(A(:,6))/50) 50*round(max(A(:,6))/50)]);  
-    axis square; grid on;  
+    if (strcmp(strSuffix,'-sw')),axis([-800 -200 -800 -200]);end; % SW
+    if (strcmp(strSuffix,'-msh')),axis([-600 200 -600 200]);end; % MSH
+      %axis([50*floor(min(A(:,3))/50) 50*round(max(A(:,3))/50) ...
+      %     50*floor(min(A(:,6))/50) 50*round(max(A(:,6))/50)]);  
+    axis square; grid on;   
     set(gca,'FontSize',10);
     xlabel('\fontsize{10}Cluster');
  %   ylabel('\fontsize{10}GUMICS-4');
     title(['\fontsize{10}B_z, V_x, n_{CIS} and n_{EFW} from GUMICS vs Cluster SC3 from ',...
             datestr(A(1,1),'yyyymmdd HH:MM'),' to ',...
             datestr(A(numel(A(:,1)),1),'yyyymmdd HH:MM')]);
+    text(0.05,0.9,'(b)','Units','Normalized');
     % y=x
     hold on;
-    plot([-1500,1500],[-1500,1500],'--k');
+    plot([-1500,1500],[-1500,1500],'--r');
     hold off;
     
     % Scattered plot - nCIS, nEFW
     subplot(2,3,6);
+%subplot(1,3,3);
     plot(A(:,4),A(:,7),'.r');
     hold on;
     plot(A(:,4),A(:,8),'.b');
     hold off;
-%    axis([0 450 0 450]);
-    axis([0 10*round(max(A(:,4))/10+1) 0 10*round(max([A(:,7);A(:,8)])/10+1)]);  
+    axis([0 150 0 150]); % SW and MSH
+%    axis([0 10*round(max(A(:,4))/10+1) 0 10*round(max([A(:,7);A(:,8)])/10+1)]);  
     axis square; grid on;  
     set(gca,'FontSize',10);
     xlabel('\fontsize{10}Cluster');
 %    ylabel('\fontsize{10}GUMICS-4');
+    text(0.05,0.9,'(c)','Units','Normalized');
     % y=x
     hold on;
     plot([0,1200],[0,1200],'--r');
