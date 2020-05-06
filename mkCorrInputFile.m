@@ -417,9 +417,19 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
             axis([t(1) t(numel(t)) ...
                 10*floor(min(min(bfgmArray),min(A(:,2)))/10) ...
                 10*round(max(max(bfgmArray),max(A(:,2)))/10+1)]);  
+            if (strcmp(strSuffix,'-sw')),
+                axis([t(1) t(numel(t)) -10 15]);
+            end; 
+            if (strcmp(strSuffix,'-msh')),
+                axis([t(1) t(numel(t)) -30 20]);
+            end;             
+            if (strcmp(strSuffix,'-ns')),
+                axis([t(1) t(numel(t)) -10 10]);
+            end;  
             title(['B_z, V_x and n from GUMICS from ',...
                 datestr(t(1),'yyyymmdd HH:MM'),' to ',...
                 datestr(t(numel(t)),'yyyymmdd HH:MM')]);
+            text(0.0125,0.9,'(a)','Units','Normalized');
         end;
     end;   
 %        xlabel('Time [HH:MM]');
@@ -455,10 +465,19 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
         if (~isBz)
             axis([t(1) t(numel(t)) -50*floor(max(A(:,3))/50+1) 0]);         
         else
-%            axis([t(1) t(numel(t)) 50*floor(min(A(:,3))/50) 0]);
             axis([t(1) t(numel(t)) ...
                 10*floor(min(min(vcisArray),min(A(:,3)))/10) ...
                 10*round(max(max(vcisArray),max(A(:,3)))/10+1)]);  
+            if (strcmp(strSuffix,'-sw')),
+                axis([t(1) t(numel(t)) -800 0]);  
+            end;
+            if (strcmp(strSuffix,'-msh')),
+                axis([t(1) t(numel(t)) -400 0]);  
+            end;
+            if (strcmp(strSuffix,'-ns')),
+                axis([t(1) t(numel(t)) -200 400]);
+            end; 
+            text(0.0125,0.9,'(b)','Units','Normalized');
         end;
     end;        
     
@@ -495,7 +514,17 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
             axis([t(1) t(numel(t)) ...
                 10*floor(min(min(min(ncisArray),min(nefwArray)),...
                 min(A(:,4)))/10) 10*round(max(max(max(ncisArray),...
-                max(nefwArray)),max(A(:,4)))/10+1)]);  
+                max(nefwArray)),max(A(:,4)))/10+1)]);                                    
+            text(0.0125,0.9,'(c)','Units','Normalized');
+            if (strcmp(strSuffix,'-sw')), % Paper
+                axis([t(1) t(numel(t)) 0 10]);    
+            end;
+            if (strcmp(strSuffix,'-msh')), % Paper
+                axis([t(1) t(numel(t)) 0 30]);    
+            end;
+            if (strcmp(strSuffix,'-ns')), % Paper
+                axis([t(1) t(numel(t)) 0 2]);
+            end; 
         end;    
     end;
     xlabel('Time [HH:MM]');

@@ -98,11 +98,15 @@ function [ error ] = mkOMNI_launch(strSuffix)
         datetick('x','HH:MM'); grid on;    
         axis([tStart tEnd ...
             10*floor(min(min(A(iLowOMNI:iHighOMNI,3:5)/10))) ...
-            10*round(max(max(A(iLowOMNI:iHighOMNI,3:5)/10+1)))]);  
+            10*round(max(max(A(iLowOMNI:iHighOMNI,3:5)/10+1)))]); 
+        if (strcmp(strSuffix,'-sw')||strcmp(strSuffix,'-msh'))
+            axis([tStart tEnd -10 20]);
+        end;
         title(['B_x, B_y, B_z, V_x, V_y, V_z and p from OMNI from ',...
             datestr(tStart,'yyyymmdd HH:MM'),' to ',...
             datestr(tEnd,'yyyymmdd HH:MM')]);         
         ylabel('B_x, B_y, B_z [nT]'); 
+        text(0.0125,0.9,'(a)','Units','Normalized');
         
         % V plot
         subplot(3,1,2);        
@@ -114,8 +118,12 @@ function [ error ] = mkOMNI_launch(strSuffix)
         datetick('x','HH:MM'); grid on;   
         axis([tStart tEnd ...
             200*floor(min(min(A(iLowOMNI:iHighOMNI,6:8)/200))) ...
-            200*round(max(max(A(iLowOMNI:iHighOMNI,6:8)/200+1)))]);                 
+            200*round(max(max(A(iLowOMNI:iHighOMNI,6:8)/200+1)))]);    
+        if (strcmp(strSuffix,'-sw')||strcmp(strSuffix,'-msh'))
+            axis([tStart tEnd -800 400]);
+        end;
         ylabel('V_x, V_y, V_z [km/s]');
+        text(0.0125,0.9,'(b)','Units','Normalized');
 
         % p plot
         subplot(3,1,3);    
@@ -123,10 +131,14 @@ function [ error ] = mkOMNI_launch(strSuffix)
         datetick('x','HH:MM'); grid on;    
         axis([tStart tEnd ...
             5*floor(min(A(iLowOMNI:iHighOMNI,11)/5)) ...
-            5*round(max(A(iLowOMNI:iHighOMNI,11)/5+1))]);            
+            5*round(max(A(iLowOMNI:iHighOMNI,11)/5+1))]);     
+        if (strcmp(strSuffix,'-sw')||strcmp(strSuffix,'-msh'))
+            axis([tStart tEnd 0 5]);
+        end;
         xlabel('Time [HH:MM]');
 %         ylabel('n [cm^{-3}]');    
-        ylabel('p [nPa]');    
+        ylabel('p [nPa]'); 
+        text(0.0125,0.9,'(c)','Units','Normalized');
         
         % Saving result in an eps file
         strTstart=datestr(tStart,'yyyymmdd_HHMMSS');

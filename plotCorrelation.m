@@ -144,13 +144,13 @@ function [ mt, mv ] = plotCorrelation(corrFilename,isOMNI,isBz,strSuffix)
     plot([-1500,1500],[-1500,1500],'--r');
     hold off;
     
-    % Scattered plot - nCIS, nEFW
+    % Scattered plot - nCIS
     subplot(2,3,6);
-%subplot(1,3,3);
-    plot(A(:,4),A(:,7),'.r');
+%subplot(1,3,3);  
+    plot(A(:,4),A(:,7),'.r');%,'MarkerSize',2);
     hold on;
-    plot(A(:,4),A(:,8),'.b');
-    hold off;
+    plot(A(:,4),A(:,8),'.b');%,'MarkerSize',1);
+    hold off;  
     axis([0 150 0 150]); % SW and MSH
 %    axis([0 10*round(max(A(:,4))/10+1) 0 10*round(max([A(:,7);A(:,8)])/10+1)]);  
     axis square; grid on;  
