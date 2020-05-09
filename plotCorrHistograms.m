@@ -213,7 +213,7 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         bar(Svc+0.05,floor(Snc/sum(Snc)*100),'FaceColor','k',...
             'EdgeColor','w');           
         title('\fontsize{10}n_{CIS}');
-        text(0.025,0.8,'(d)','Units','Normalized');
+        text(0.025,0.8,'(e)','Units','Normalized');
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');
              set(gca,'Xlim',[0.6 1]);              
@@ -226,11 +226,11 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
              set(gca,'YLim',[0 100],'Layer','top');
              set(gca,'Xlim',[0.6 1]);  
         end;
-        xlabel('Correlation coefficients');
+        %xlabel('Correlation coefficients');
         ylabel('Ratio [%]');
         set(gca,'FontSize',10);
         %axis square;
-        xlabel('\fontsize{10}Coefficient');
+        %xlabel('\fontsize{10}Coefficient');
         ylabel('\fontsize{10}Ratio [%]');    
         
         % Time shift histogram - n CIS
@@ -256,7 +256,7 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         end;
         set(gca,'FontSize',10);
         %axis square;
-        xlabel('\fontsize{10}Time shift [min]');
+        %xlabel('\fontsize{10}Time shift [min]');
         %ylabel('\fontsize{10}Ratio [%]');   
         
         % Coefficient histogram - n EFW
