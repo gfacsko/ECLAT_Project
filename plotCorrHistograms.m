@@ -86,7 +86,8 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         %text(0.025,0.8,'(a)');
         text(0.025,0.8,'(a)','Units','Normalized');
         if (strcmp(strSuffix,'-sw')||strcmp(strSuffix,'-msh'))
-            set(gca,'YLim',[0 100],'Layer','top');
+            set(gca,'YLim',[0 100],'Layer','top');   
+            set(gca,'YTick',0:50:100);           
             set(gca,'Xlim',[0.6 1]);
         end;
         if (strcmp(strSuffix,'-msh'))
@@ -133,11 +134,13 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
             title('\fontsize{10}B_z');
             text(0.025,0.8,'(b)','Units','Normalized');
             if (strcmp(strSuffix,'-sw'))
-                set(gca,'YLim',[0 100],'Layer','top');        
+                set(gca,'YLim',[0 100],'Layer','top');     
+                set(gca,'YTick',0:50:100);                   
                 set(gca,'Xlim',[-15 15]);                
             end;
             if (strcmp(strSuffix,'-msh'))
                  set(gca,'YLim',[0 100],'Layer','top');        
+                 Set(gca,'YTick',0:50:100);     
                  set(gca,'Xlim',[-15 15]);                
             end;
             if (strcmp(strSuffix,'-msph'))
@@ -165,14 +168,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         text(0.025,0.8,'(c)','Units','Normalized'); 
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[0.6 1]);             
         end;
         if (strcmp(strSuffix,'-msh'))
              set(gca,'YLim',[0 100],'Layer','top');
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[0.6 1]);
         end;
         if (strcmp(strSuffix,'-msph'))
              set(gca,'YLim',[0 100],'Layer','top');
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[0.6 1]);
         end;
         set(gca,'FontSize',10);
@@ -190,15 +196,18 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         title('\fontsize{10}V_x');
         text(0.025,0.8,'(d)','Units','Normalized');
         if (strcmp(strSuffix,'-sw'))
-             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YLim',[0 100],'Layer','top');   
+             set(gca,'YTick',0:50:100);          
              set(gca,'Xlim',[-15 15]);             
         end;
         if (strcmp(strSuffix,'-msh'))
-             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YLim',[0 100],'Layer','top');    
+             set(gca,'YTick',0:50:100);         
              set(gca,'Xlim',[-15 15]);             
         end;
         if (strcmp(strSuffix,'-msph'))
              set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[-10 5]);
         end;
         set(gca,'FontSize',10);
@@ -216,14 +225,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         text(0.025,0.8,'(e)','Units','Normalized');
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[0.6 1]);              
         end;
         if (strcmp(strSuffix,'-msh'))
               set(gca,'YLim',[0 100],'Layer','top');
+              set(gca,'YTick',0:50:100);     
               set(gca,'Xlim',[0.6 1]);  
         end;
         if (strcmp(strSuffix,'-msph'))
              set(gca,'YLim',[0 100],'Layer','top');
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[0.6 1]);  
         end;
         %xlabel('Correlation coefficients');
@@ -244,14 +256,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         text(0.025,0.8,'(f)','Units','Normalized');
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[-15 15]);
         end;
         if (strcmp(strSuffix,'-msh'))
              set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[-15 15]);
         end;
         if (strcmp(strSuffix,'-msph'))
-             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YLim',[0 100],'Layer','top');       
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[-5 15]);
         end;
         set(gca,'FontSize',10);
@@ -269,14 +284,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         text(0.025,0.8,'(g)','Units','Normalized');
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[0.6 1]);             
         end;
         if (strcmp(strSuffix,'-msh'))
               set(gca,'YLim',[0 100],'Layer','top');
+              set(gca,'YTick',0:50:100);     
               set(gca,'Xlim',[0.6 1]);  
         end;
         if (strcmp(strSuffix,'-msph'))
               set(gca,'YLim',[0 100],'Layer','top');
+              set(gca,'YTick',0:50:100);     
               set(gca,'Xlim',[0.6 1]);  
         end;
         xlabel('Correlation coefficients');
@@ -297,14 +315,17 @@ function [ error ] = plotCorrHistograms(isOMNI,isBz,strSuffix)
         text(0.025,0.8,'(h)','Units','Normalized');
         if (strcmp(strSuffix,'-sw'))
              set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[-15 15]);            
         end;
         if (strcmp(strSuffix,'-msh'))
-             set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YLim',[0 100],'Layer','top');       
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[-15 15]);
         end;
         if (strcmp(strSuffix,'-msph'))
              set(gca,'YLim',[0 100],'Layer','top');        
+             set(gca,'YTick',0:50:100);     
              set(gca,'Xlim',[-20 10]);
         end;
         set(gca,'FontSize',10);
