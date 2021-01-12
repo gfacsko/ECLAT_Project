@@ -430,10 +430,19 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
             if (strcmp(strSuffix,'-ns')),
                 axis([t(1) t(numel(t)) -10 10]);
             end;  
-            title(['B_z, V_x and n from GUMICS from ',...
+            title(['\rm B_z, V_x and n from GUMICS from ',...
                 datestr(t(1),'yyyymmdd HH:MM'),' to ',...
                 datestr(t(numel(t)),'yyyymmdd HH:MM')]);
             text(0.0125,0.9,'(a)','Units','Normalized');
+            % Neutral sheet crossing
+            hold on;
+            plot([datenum('2002-09-28T05:15','yyyy-mm-ddTHH:MM'),...
+                datenum('2002-09-28T05:15','yyyy-mm-ddTHH:MM')],...
+                [-10,10],'--g');
+             plot([datenum('2002-09-28T05:30','yyyy-mm-ddTHH:MM'),...
+                datenum('2002-09-28T05:30','yyyy-mm-ddTHH:MM')],...
+                [-10,10],'--g');
+            hold off; 
         end;
     end;   
 %        xlabel('Time [HH:MM]');
@@ -480,6 +489,15 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
             end;
             if (strcmp(strSuffix,'-ns')),
                 axis([t(1) t(numel(t)) -200 400]);
+                % Neutral sheet crossing
+                hold on;
+                plot([datenum('2002-09-28T05:15','yyyy-mm-ddTHH:MM'),...
+                    datenum('2002-09-28T05:15','yyyy-mm-ddTHH:MM')],...
+                    [-200,400],'--g');
+                plot([datenum('2002-09-28T05:30','yyyy-mm-ddTHH:MM'),...
+                    datenum('2002-09-28T05:30','yyyy-mm-ddTHH:MM')],...
+                    [-200,400],'--g');
+            hold off
             end; 
             text(0.0125,0.9,'(b)','Units','Normalized');
         end;
@@ -528,6 +546,15 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
             end;
             if (strcmp(strSuffix,'-ns')), % Paper
                 axis([t(1) t(numel(t)) 0 2]);
+                % Neutral sheet crossing
+                hold on;
+                plot([datenum('2002-09-28T05:15','yyyy-mm-ddTHH:MM'),...
+                    datenum('2002-09-28T05:15','yyyy-mm-ddTHH:MM')],...
+                    [0,2],'--g');
+                plot([datenum('2002-09-28T05:30','yyyy-mm-ddTHH:MM'),...
+                    datenum('2002-09-28T05:30','yyyy-mm-ddTHH:MM')],...
+                    [0,2],'--g');
+                hold off
             end; 
         end;    
     end;
