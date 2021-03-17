@@ -1,4 +1,5 @@
-function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
+function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,is5min,...
+    strSuffix)
 %mkCorrInputFile Creates correlation input files from OMNIWeb or 
 %   GUMICS data
 %
@@ -7,12 +8,13 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
 % 
 %   tStart   : Start
 %   tEnd     : End
-%   isOMNI   : OMNIWeb correlation file?
 %   isBz     : Use Bz component only
+%   isOMNI   : OMNIWeb correlation file?
+%   is5min   : 5 min / 1 min average
 %   strSuffix: Extra string to distinguish the results
 %
-%   Developed by Gabor Facsko (facsko.gabor@mta.csfk.hu), 2014-2017
-%   Geodetic and Geophysical Institute, RCAES, Sopron, Hungary
+%   Developed by Gabor Facsko (facsko.gabor@wigner.hu), 2014-2021
+%   Wigner Research Centre for Physics, Budapest, Hungary
 %----------------------------------------------------------------------
 %   
     % Initialisation
@@ -20,8 +22,16 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
     if (isOMNI)
         Thalf=30.;
     else
-%        Thalf=150.;
-        Thalf=30.;  
+        % 5 min / 1 min average
+        str5min='';
+        if (is5min)
+            % 5 min average
+            Thalf=150.; 
+            str5min='-5min';
+        else
+            % 1 min average
+            Thalf=30.; 
+        end;
     end;
     % Default directories
     root_path='/home/facskog/Projectek/Matlab/ECLAT/'; 
@@ -47,7 +57,7 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
        
     % Temporary Correlation file
     [corrTempFilename,Nrow]=mkCorrTempFile(tStart,tEnd,isOMNI,isBz,...
-        strSuffix);
+        is5min,strSuffix);
     
     % Array declaration
     if (isOMNI)
@@ -65,7 +75,7 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
         t=A(:,1);
     end;
     
-    z=zeros(length(A(:,1)),1);
+    z=zeros(length(A(:,1)),1);    
     bfgmArray=z; % Save Cluster B
     vcisArray=z; % Save Cluster V
     ncisArray=z; % Save Cluster n
@@ -160,7 +170,8 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
             cisFilename];
         efwFilename=['C3_CP_EFW_L3_P__',datestr(id,'yyyymmdd_HHMMSS_'),...
              datestr(id+1,'yyyymmdd_HHMMSS'),'_V*.cdf'];
-        [status,result]=unix(['ls ',data_path,'C3_CP_EFW_L3_P/',efwFilename]);
+        [status,result]=unix(['ls ',data_path,'C3_CP_EFW_L3_P/',...
+            efwFilename]);
         fullEfwFilename=result(1:numel(result)-1);
         if (id==floor(tStart))
             fgmCell = cdfread(fullFgmFilename,'Variable',...
@@ -244,10 +255,11 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
     scpos=[fgm.scpos];
     vvec=[cis.vvec];
     n=[cis.n];        
-    % Calculating the density using empitrical formula
+    % Calculating the density using empirical formula
     nvsc=[efw.vsc];    
     for ie = 1:length(nvsc)
-        nvsc(ie) = 200*(-nvsc(ie)).^(-1.85);
+        % To avoig complex numbers
+        nvsc(ie) = real(200*(-nvsc(ie)).^(-1.85));
     end;
     if (~isBz)
         % B
@@ -277,7 +289,7 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
                     
     % Inputfile ---------------------------------------------------            
     corrInputFilename=[corrTempFilename(1:numel(corrTempFilename)-9),...
-        '.dat'];   
+        str5min,'.dat'];   
  
     % Save results
     fid=fopen([root_path,'data/',strSubDir,corrInputFilename], 'w');    
@@ -388,7 +400,12 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
     hold on;
     plot(t,bfgmArray,'-r');
     hold off;   
-    datetick('x','HH:MM'); grid on;
+    datetick('x','HH:MM'); 
+    % Set dotted grid lines
+    grid on;
+    ax = gca;
+    ax.GridLineStyle = ':';
+    % End of grid settings
     if (isOMNI)
         if (~isBz)
             axis([t(1) t(numel(t)) ...
@@ -419,13 +436,21 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
                 10*round(max(max(bfgmArray),max(A(:,2)))/10+1)]);  
             if (strcmp(strSuffix,'-sw')),
                 axis([t(1) t(numel(t)) -10 15]);
+                set(gca,'XTick',t(1):1./48.:t(numel(t)));
+                set(gca,'XTickLabel',{'07:30','08:00','08:30','09:00',...
+                     '09:30','10:00','10:30','11:00','11:30','12:00',...
+                     '12:30','13:00'}); 
+                set(gca,'YTick',-10:5:15);
+                set(gca,'YTickLabel',{'-10','-5','0','5','10','15'}); 
             end; 
             if (strcmp(strSuffix,'-msh')),
-                axis([t(1) t(numel(t)) -30 20]);
+             %   axis([t(1) t(numel(t)) -30 20]);
                 set(gca,'XTick',tStart:1./48.:tEnd);
                 set(gca,'XTickLabel',{'02:30','03:00','03:30','04:00',...
                     '04:30','05:00','05:30','06:00','06:30','07:00',...
                     '07:30','08:00','08:30','09:00'}); 
+                set(gca,'YTick',-30:10:20);
+                set(gca,'YTickLabel',{'-30','-20','-10','0','10','20'}); 
             end;             
             if (strcmp(strSuffix,'-ns')),
                 axis([t(1) t(numel(t)) -10 10]);
@@ -474,7 +499,12 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
             plot(t,vcisArray,'-r');
             hold off;   
         end;
-        datetick('x','HH:MM'); grid on;
+        datetick('x','HH:MM');
+        % Set dotted grid lines
+        grid on;
+        ax = gca;
+        ax.GridLineStyle = ':';
+        % End of grid line settings
         if (~isBz)
             axis([t(1) t(numel(t)) -50*floor(max(A(:,3))/50+1) 0]);         
         else
@@ -483,9 +513,21 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
                 10*round(max(max(vcisArray),max(A(:,3)))/10+1)]);  
             if (strcmp(strSuffix,'-sw')),
                 axis([t(1) t(numel(t)) -800 0]);  
+                set(gca,'XTick',t(1):1./48.:t(numel(t)));
+                set(gca,'XTickLabel',{'07:30','08:00','08:30','09:00',...
+                     '09:30','10:00','10:30','11:00','11:30','12:00',...
+                     '12:30','13:00'}); 
+                set(gca,'YTick',-800:200:0);
+                set(gca,'YTickLabel',{'-800','-600','-400','-200','0'}); 
             end;
             if (strcmp(strSuffix,'-msh')),
-                axis([t(1) t(numel(t)) -400 0]);  
+                axis([t(1) t(numel(t)) -400 0]); 
+                set(gca,'XTick',tStart:1./48.:tEnd);
+                set(gca,'XTickLabel',{'02:30','03:00','03:30','04:00',...
+                    '04:30','05:00','05:30','06:00','06:30','07:00',...
+                    '07:30','08:00','08:30','09:00'}); 
+                set(gca,'YTick',-400:100:0);
+                set(gca,'YTickLabel',{'-400','-300','-200','-100','0'});
             end;
             if (strcmp(strSuffix,'-ns')),
                 axis([t(1) t(numel(t)) -200 400]);
@@ -528,7 +570,12 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
             end;
             hold off;   
         end;    
-        datetick('x','HH:MM'); grid on;
+        datetick('x','HH:MM');
+        % Set dotted grid lines
+        grid on;
+        ax = gca;
+        ax.GridLineStyle = ':';
+        % End of grid line settings
         if (~isBz)
             axis([t(1) t(numel(t)) 10*floor(min(A(:,4))/10) ...
                 10*round(max(A(:,4))/10+1)]);
@@ -539,10 +586,22 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
                 max(nefwArray)),max(A(:,4)))/10+1)]);                                    
             text(0.0125,0.9,'(c)','Units','Normalized');
             if (strcmp(strSuffix,'-sw')), % Paper
-                axis([t(1) t(numel(t)) 0 10]);    
+                axis([t(1) t(numel(t)) 0 10]);  
+                set(gca,'XTick',t(1):1./48.:t(numel(t)));
+                set(gca,'XTickLabel',{'07:30','08:00','08:30','09:00',...
+                     '09:30','10:00','10:30','11:00','11:30','12:00',...
+                     '12:30','13:00'}); 
+                set(gca,'YTick',0:5:10);
+                set(gca,'YTickLabel',{'0','5','10'}); 
             end;
             if (strcmp(strSuffix,'-msh')), % Paper
-                axis([t(1) t(numel(t)) 0 30]);    
+           %     axis([t(1) t(numel(t)) 0 30]);    
+                set(gca,'XTick',tStart:1./48.:tEnd);
+                set(gca,'XTickLabel',{'02:30','03:00','03:30','04:00',...
+                    '04:30','05:00','05:30','06:00','06:30','07:00',...
+                    '07:30','08:00','08:30','09:00'}); 
+                set(gca,'YTick',0:10:30);
+                set(gca,'YTickLabel',{'0','10','20','30'});
             end;
             if (strcmp(strSuffix,'-ns')), % Paper
                 axis([t(1) t(numel(t)) 0 2]);
@@ -571,8 +630,10 @@ function [ error ] = mkCorrInputFile(tStart,tEnd,isOMNI,isBz,strSuffix)
     else
         bzStr='';
         if (isBz),bzStr='-bz';end;
+        % if is5min then add a suffix to the filename
         print(p,'-depsc2',[root_path,'images/',strSubDir,'corr-',...
-            strTstart,'_',strTend,bzStr,'-gumics',strSuffix,'.eps']);
+            strTstart,'_',strTend,bzStr,'-gumics',strSuffix,str5min,...
+            '.eps']);
     end;   
     % Closing the plot box
     close;

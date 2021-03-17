@@ -1,11 +1,11 @@
-function [ error ] = plotClusterOrbit( strSuffix )
+function [ error ] = plotClusterOrbit( is5min,strSuffix )
 %plotClusterOrbit Plot Cluster SC3 orbit used in the study
 %   Read cdf files and plot Cluster SC3 orbit in the solar wind. 
 % 
 %   strSuffix : The type of the data
 %
-%   Developed by Gabor Facsko (facsko.gabor@csfk.mta.hu), 2014
-%   Geodetic and Geophysical Institute, RCAES, HAS, Sopron, Hungary
+%   Developed by Gabor Facsko (facsko.gabor@wigner.hu), Wigner 
+%   Research Centre for Physics, 2017-2021
 %----------------------------------------------------------------------
 %   
     % Earth radius
@@ -22,7 +22,7 @@ function [ error ] = plotClusterOrbit( strSuffix )
     tStart=datenum(strLine(1:23),'yyyy-mm-ddTHH:MM:SS.FFF');      
     tEnd=datenum(strLine(26:48),'yyyy-mm-ddTHH:MM:SS.FFF');
     % Temporary Correlation file  
-    error=mkCorrInputFile(tStart,tEnd,false,false,strSuffix);
+    error=mkCorrInputFile(tStart,tEnd,false,false,is5min,strSuffix);
     isFirst=true;
     while ~feof(fid)
         strLine = fgetl(fid);
@@ -128,22 +128,22 @@ function [ error ] = plotClusterOrbit( strSuffix )
 %     if (isSmall)
 %         plot(posArray(1,:),posArray(3,:),'.r','markersize',3;
 %     else
-        plot(posArray(1,:),posArray(3,:),'.k','markersize',2);
+        plot(posArray(1,:),posArray(3,:),'.k','markersize',1);
 %    end;
     axis([-R R -R R]); axis square;    
-    title('\fontsize{12}XZ GSE plane');
-    xlabel('\fontsize{12}X_{GSE} [R_E]');
-    ylabel('\fontsize{12}Z_{GSE} [R_E]');       
-    text(-18,16,'\fontsize{12}(a)');
+    title('\rm \fontsize{8}XZ GSE plane');
+    xlabel('\rm \fontsize{8}X_{GSE} [R_E]');
+    ylabel('\rm \fontsize{8}Z_{GSE} [R_E]');       
+    text(-18,16,'\fontsize{8}(a)');
     set(gca,'xtick',[-20 -10 0 10 20]);
     set(gca,'ytick',[-20 -10 0 10 20]);
-    set(gca,'FontSize',12); set(gca,'LineWidth',2); 
+    set(gca,'FontSize',8); set(gca,'LineWidth',1); 
     hold on;
     % Bow shock
-    plot(xx,0.5*(-B-D),'-k','LineWidth',2);
-    plot(xx,0.5*(-B+D),'-k','LineWidth',2);
+    plot(xx,0.5*(-B-D),'--k','LineWidth',1);
+    plot(xx,0.5*(-B+D),'--k','LineWidth',1);
     plot([max(xx), max(xx)], 0.5*[max(-B-D), min(-B+D)],...
-        '-k','LineWidth',2);
+        '--k','LineWidth',1);
 
     % Cyrindlic plot calculations -----------------
     zzR=0.5*(-B+D);
@@ -155,12 +155,12 @@ function [ error ] = plotClusterOrbit( strSuffix )
     
     % BS text
 %    text(12.5, 15, 'BS');
-    % Magnetopausa
+    % Magnetopause
     [xmax,ixmax]=max(xxx);
-    plot(xxx,yyy,'-k','LineWidth',2); 
-    plot(xxx,-yyy,'-k','LineWidth',2);
+    plot(xxx,yyy,'--k','LineWidth',1); 
+    plot(xxx,-yyy,'--k','LineWidth',1);
     plot([xxx(ixmax),xxx(ixmax)],[yyy(ixmax),-yyy(ixmax)],...
-        '-k','LineWidth',2);
+        '-k','LineWidth',1);
     % MP text
 %    text(2.5, 15, 'MP');
     % The Earth
@@ -171,15 +171,15 @@ function [ error ] = plotClusterOrbit( strSuffix )
         [0 0 0],'Curvature',[1,1],'LineWidth',1,'LineStyle',':');  
     hold off;        
     % XY plot ----------------------------------------------------------
-    subplot(2,2,3); plot(posArray(1,:),posArray(2,:),'.k','markersize',2); 
+    subplot(2,2,3); plot(posArray(1,:),posArray(2,:),'.k','markersize',1); 
     axis([-R R -R R]); axis square; 
-    title('\fontsize{12}XY GSE plane');
-    xlabel('\fontsize{12}X_{GSE} [R_E]');
-    ylabel('\fontsize{12}Y_{GSE} [R_E]');   
-    text(-18,16,'\fontsize{12}(c)');
+    title('\rm \fontsize{8}XY GSE plane');
+    xlabel('\rm \fontsize{8}X_{GSE} [R_E]');
+    ylabel('\rm \fontsize{8}Y_{GSE} [R_E]');   
+    text(-18,16,'\fontsize{8}(c)');
     set(gca,'xtick',[-20 -10 0 10 20]);
     set(gca,'ytick',[-20 -10 0 10 20]);
-    set(gca,'FontSize',12); set(gca,'LineWidth',2);      
+    set(gca,'FontSize',8); set(gca,'LineWidth',1);      
     hold on;
     xx = R*((1:2000)/1000.0-1.);
     zz = sqrt(-(a1*xx.^2+a7*xx+a10)/a3);
@@ -187,10 +187,10 @@ function [ error ] = plotClusterOrbit( strSuffix )
     zz = zz(find(real(zz)));
 %     xx = xx[WHERE(xx lt 50)]
 %     D = D[WHERE(xx lt 50)]
-    plot(xx,zz,'-k','LineWidth',2);
-    plot(xx,-zz,'-k','LineWidth',2);
+    plot(xx,zz,'--k','LineWidth',1);
+    plot(xx,-zz,'--k','LineWidth',1);
     plot([max(xx), max(xx)],[-min(zz),min(zz)],...
-        '-k','LineWidth',2);
+        '--k','LineWidth',1);
 %     % BS text
 %     text(15,15,'BS');
     % MP position
@@ -200,10 +200,10 @@ function [ error ] = plotClusterOrbit( strSuffix )
 %    zzz = a*sqrt(sigma.*sigma-1.)*sqrt(1.-tau.*tau).*sin(phi);
 %     xxx=xxx(find(real(zzz)));   
 %     zzz=zzz(find(real(zzz)));
-    plot(xxx,zzz,'-k','LineWidth',2);
-    plot(xxx,-zzz,'-k','LineWidth',2);
+    plot(xxx,zzz,'--k','LineWidth',1);
+    plot(xxx,-zzz,'--k','LineWidth',1);
     plot([xxx(ixmax),xxx(ixmax)],[zzz(ixmax),-zzz(ixmax)],...
-        '-k','LineWidth',2);
+        '--k','LineWidth',1);
 %     % MP text
 %     text(2.5,15,'MP');   
     % The Earth
@@ -214,19 +214,19 @@ function [ error ] = plotClusterOrbit( strSuffix )
         [0 0 0],'Curvature',[1,1],'LineWidth',1,'LineStyle',':');  
     hold off;
    % YZ plot ----------------------------------------------------------
-    subplot(2,2,2);plot(posArray(2,:),posArray(3,:),'.k','markersize',2); 
+    subplot(2,2,2);plot(posArray(2,:),posArray(3,:),'.k','markersize',1); 
     axis([-R R -R R]); axis square; 
-    title('\fontsize{12}YZ GSE plane');
-    xlabel('\fontsize{12}Y_{GSE} [R_E]');
-    ylabel('\fontsize{12}Z_{GSE} [R_E]');  
-    text(-18,16,'\fontsize{12}(b)'); 
+    title('\rm\fontsize{8}YZ GSE plane');
+    xlabel('\rm\fontsize{8}Y_{GSE} [R_E]');
+    ylabel('\rm\fontsize{8}Z_{GSE} [R_E]');  
+    text(-18,16,'\fontsize{8}(b)'); 
     set(gca,'xtick',[-20 -10 0 10 20]);
     set(gca,'ytick',[-20 -10 0 10 20]); 
-    set(gca,'FontSize',12); set(gca,'LineWidth',2);      
+    set(gca,'FontSize',8); set(gca,'LineWidth',1);
     hold on;   
     % False MP    
     rectangle('Position',[-1,-1,2,2]*15,'EdgeColor',...
-        [0 0 0],'Curvature',[1,1],'LineWidth',2,'LineStyle','-');  
+        [0 0 0],'Curvature',[1,1],'LineWidth',1,'LineStyle','--');  
     % The Earth
     rectangle('Position',[-1,-1,2,2],'FaceColor',[0,0,0],'EdgeColor',...
         [0.99 0.99 0.99],'Curvature',[1,1],'LineWidth',1);      
@@ -235,24 +235,25 @@ function [ error ] = plotClusterOrbit( strSuffix )
         [0 0 0],'Curvature',[1,1],'LineWidth',1,'LineStyle',':');  
     hold off;
     % Cylindrical plot ----------------------------------------------------------
-    subplot(2,2,4);plot(posArray(1,:),sqrt(posArray(2,:).^2.+posArray(3,:).^2),'.k','markersize',2); 
+    subplot(2,2,4);
+    plot(posArray(1,:),sqrt(posArray(2,:).^2.+posArray(3,:).^2),'.k','markersize',1); 
     axis([-R R 0 R]); axis square; % axis([0 R 0 R]);
-    title('\fontsize{12}Cylindrical projection');
-    xlabel('\fontsize{12}X_{GSE} [R_E]');
-    ylabel('(Y_{GSE}^2+Z_{GSE}^2)^{0.5} [R_{E}]');
-    text(-18,18,'\fontsize{12}(d)'); %1,16 % text(17,18,'\fontsize{12}(d)'); %1,16
+    title('\rm\fontsize{8}Cylindrical projection');
+    xlabel('\rm\fontsize{8}X_{GSE} [R_E]');
+    ylabel('\rm\fontsize{8}(Y_{GSE}^2+Z_{GSE}^2)^{0.5} [R_{E}]');
+    text(-18,18,'\rm\fontsize{8}(d)'); %1,16 % text(17,18,'\fontsize{12}(d)'); %1,16
     set(gca,'xtick',[-20 -10 0 10 20]); %set(gca,'xtick',[0 5 10 15 20]);
     set(gca,'ytick',[0 5 10 15 20]);
-    set(gca,'FontSize',12); set(gca,'LineWidth',2);  
+    set(gca,'FontSize',8); set(gca,'LineWidth',1);  
     hold on;   
     % MP    
-    plot(xxx,sqrt(yyy.^2+zzz.^2),'-k','LineWidth',2);
+    plot(xxx,sqrt(yyy.^2+zzz.^2),'--k','LineWidth',1);
     plot([max(xxx),max(xxx)],[0,min(sqrt(yyy.^2+zzz.^2))],...
-        '-k','LineWidth',2);
+        '--k','LineWidth',1);
     % BS
-    plot(xxR,sqrt(yyR.^2+zzR.^2),'-k','LineWidth',2);
+    plot(xxR,sqrt(yyR.^2+zzR.^2),'--k','LineWidth',1);
     plot([max(xxR),max(xxR)],[0,min(sqrt(yyR.^2+zzR.^2))],...
-        '-k','LineWidth',2);
+        '--k','LineWidth',1);
     % The Earth
     rectangle('Position',[-1,-1,2,2],'FaceColor',[0,0,0],'EdgeColor',...
         [0.99 0.99 0.99],'Curvature',[1,1],'LineWidth',1);      

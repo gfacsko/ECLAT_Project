@@ -1,11 +1,11 @@
 function [ error ] = mkOMNI_launch(strSuffix) 
-%plotCorrelation_launch Comparation of Cluster and 
+%mkOMNI_launch Comparation of Cluster and 
 %   OMNIWeb/GUMICS measurements
 %   Check all previously created OMNIWeb/GUMICS and Cluster 
 %   files. Study the OMNI data for each of them
 %
-%   Developed by Gabor Facsko (facsko.gabor@csfk.mta.hu)
-%   HAS RCAES Geodetic and Geophysical Institute, 2017
+%   Developed by Gabor Facsko (facsko.gabor@wigner.hu)
+%   Wigner Research Centre for Physics, Budapest, 2017-2021
 %
 % -----------------------------------------------------------------
 %    
@@ -99,20 +99,31 @@ function [ error ] = mkOMNI_launch(strSuffix)
         axis([tStart tEnd ...
             10*floor(min(min(A(iLowOMNI:iHighOMNI,3:5)/10))) ...
             10*round(max(max(A(iLowOMNI:iHighOMNI,3:5)/10+1)))]); 
-        if (strcmp(strSuffix,'-sw')||strcmp(strSuffix,'-msh'))
-            axis([tStart tEnd -10 20]);
-        end;
-        if (strcmp(strSuffix,'-msh'))
-            set(gca,'XTick',tStart:1./48.:tEnd);
-            set(gca,'XTickLabel',{'02:30','03:00','03:30','04:00','04:30',...
-                '05:00','05:30','06:00','06:30','07:00','07:30','08:00',...
-                '08:30','09:00'});            
-        end;
-        title(['B_x, B_y, B_z, V_x, V_y, V_z and p from OMNI from ',...
+        % Set dotted grid lines
+        grid on;
+        ax = gca;
+        ax.GridLineStyle = ':';
+        % End of grid line settings 
+        set(gca,'FontSize',8);
+        axis([tStart tEnd -10 20]);
+        set(gca,'XTick',tStart:1./48.:tEnd);
+        set(gca,'YTick',-10:10:20);
+        set(gca,'YTickLabel',{'-10','0','10','20'}); 
+        if (strcmp(strSuffix,'-sw'))           
+            set(gca,'XTickLabel',{'07:30','08:00','08:30','09:00',...
+                '09:30','10:00','10:30','11:00','11:30','12:00',...
+                '12:30','13:00'});               
+        end;   
+        if (strcmp(strSuffix,'-msh'))                       
+            set(gca,'XTickLabel',{'02:30','03:00','03:30','04:00',...
+                '04:30','05:00','05:30','06:00','06:30','07:00',...
+                '07:30','08:00','08:30','09:00'}); 
+        end;   
+        title(['\rm\fontsize{8}B_x, B_y, B_z, V_x, V_y, V_z and p from OMNI from ',...
             datestr(tStart,'yyyymmdd HH:MM'),' to ',...
             datestr(tEnd,'yyyymmdd HH:MM')]);         
-        ylabel('B_x, B_y, B_z [nT]'); 
-        text(0.0125,0.9,'(a)','Units','Normalized');
+        ylabel('\fontsize{8}B_x, B_y, B_z [nT]'); 
+        text(0.0125,0.9,'\fontsize{8}(a)','Units','Normalized');
         
         % V plot
         subplot(3,1,2);        
@@ -121,30 +132,65 @@ function [ error ] = mkOMNI_launch(strSuffix)
         plot(A(iLowOMNI:iHighOMNI,1),A(iLowOMNI:iHighOMNI,7),'-b');
         plot(A(iLowOMNI:iHighOMNI,1),A(iLowOMNI:iHighOMNI,8),'-g');
         hold off;           
-        datetick('x','HH:MM'); grid on;   
-        axis([tStart tEnd ...
-            200*floor(min(min(A(iLowOMNI:iHighOMNI,6:8)/200))) ...
-            200*round(max(max(A(iLowOMNI:iHighOMNI,6:8)/200+1)))]);    
-        if (strcmp(strSuffix,'-sw')||strcmp(strSuffix,'-msh'))
-            axis([tStart tEnd -800 400]);
-        end;
-        ylabel('V_x, V_y, V_z [km/s]');
-        text(0.0125,0.9,'(b)','Units','Normalized');
+        datetick('x','HH:MM'); grid on;  
+        % Set dotted grid lines
+        grid on;
+        ax = gca;
+        ax.GridLineStyle = ':';
+        % End of grid line settings 
+        set(gca,'FontSize',8);
+%         axis([tStart tEnd ...
+%             200*floor(min(min(A(iLowOMNI:iHighOMNI,6:8)/200))) ...
+%             200*round(max(max(A(iLowOMNI:iHighOMNI,6:8)/200+1)))]);    
+        axis([tStart tEnd -800 400]);
+        set(gca,'XTick',tStart:1./48.:tEnd);
+        set(gca,'YTick',-800:200:400);
+        set(gca,'YTickLabel',{'-800','-600','-400','-200','0','200',...
+            '400'});  
+        if (strcmp(strSuffix,'-sw'))                      
+            set(gca,'XTickLabel',{'07:30','08:00','08:30','09:00',...
+                '09:30','10:00','10:30','11:00','11:30','12:00',...
+                '12:30','13:00'});            
+        end;    
+        if (strcmp(strSuffix,'-msh'))                      
+            set(gca,'XTickLabel',{'02:30','03:00','03:30','04:00',...
+                '04:30','05:00','05:30','06:00','06:30','07:00',...
+                '07:30','08:00','08:30','09:00'});                
+        end;   
+        ylabel('\fontsize{8}V_x, V_y, V_z [km/s]');
+        text(0.0125,0.9,'\fontsize{8}(b)','Units','Normalized');
 
         % p plot
         subplot(3,1,3);    
         plot(A(iLowOMNI:iHighOMNI,1),A(iLowOMNI:iHighOMNI,11),'-k');           
-        datetick('x','HH:MM'); grid on;    
-        axis([tStart tEnd ...
-            5*floor(min(A(iLowOMNI:iHighOMNI,11)/5)) ...
-            5*round(max(A(iLowOMNI:iHighOMNI,11)/5+1))]);     
-        if (strcmp(strSuffix,'-sw')||strcmp(strSuffix,'-msh'))
-            axis([tStart tEnd 0 5]);
-        end;
-        xlabel('Time [HH:MM]');
+        datetick('x','HH:MM');   
+%         axis([tStart tEnd ...
+%             5*floor(min(A(iLowOMNI:iHighOMNI,11)/5)) ...
+%             5*round(max(A(iLowOMNI:iHighOMNI,11)/5+1))]);     
+        % Set dotted grid lines
+        grid on;
+        ax = gca;
+        ax.GridLineStyle = ':';
+        % End of grid line settings 
+        set(gca,'FontSize',8);
+        axis([tStart tEnd 0 5]);
+        set(gca,'XTick',tStart:1./48.:tEnd);
+        set(gca,'YTick',0:1:5);
+        set(gca,'YTickLabel',{'0','1','2','3','4','5'}); 
+        if (strcmp(strSuffix,'-sw'))                       
+            set(gca,'XTickLabel',{'07:30','08:00','08:30','09:00',...
+                '09:30','10:00','10:30','11:00','11:30','12:00',...
+                '12:30','13:00'});                            
+        end;   
+        if (strcmp(strSuffix,'-msh'))                      
+            set(gca,'XTickLabel',{'02:30','03:00','03:30','04:00',...
+                '04:30','05:00','05:30','06:00','06:30','07:00',...
+                '07:30','08:00','08:30','09:00'});                
+        end;   
+        xlabel('\fontsize{8}Time [HH:MM]');
 %         ylabel('n [cm^{-3}]');    
-        ylabel('p [nPa]'); 
-        text(0.0125,0.9,'(c)','Units','Normalized');
+        ylabel('\fontsize{8}p [nPa]'); 
+        text(0.0125,0.9,'\fontsize{8}(c)','Units','Normalized');
         
         % Saving result in an eps file
         strTstart=datestr(tStart,'yyyymmdd_HHMMSS');

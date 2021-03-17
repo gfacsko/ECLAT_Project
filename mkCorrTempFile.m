@@ -1,4 +1,5 @@
-function [ corrFilename, Nrow ] = mkCorrTempFile(tStart,tEnd,isOMNI,isBz,strSuffix)
+function [ corrFilename, Nrow ] = mkCorrTempFile(tStart,tEnd,isOMNI,...
+    isBz,is5min,strSuffix)
 %mkCorrFile Create file for correlation calculation from OMNIWeb and 
 %   Cluster magnetic field cdf files
 %
@@ -6,11 +7,11 @@ function [ corrFilename, Nrow ] = mkCorrTempFile(tStart,tEnd,isOMNI,isBz,strSuff
 %   tEnd         : Correlation end
 %   isBz         : GUMICS correlation using Bz
 %   isOMNI       : OMNIWeb/GUMICS-4 correlation
-%   corrFilename : Created correlation filename
-%   strSuffix    : Extra string to distinguish the results
+%   is5min       : 5 min average
+%   strSuffix: Extra string to distinguish the results
 %
-%   Developed by Gabor Facsko (facsko.gabor@mta.csfk.hu), 2014-2017
-%   Geodetic and Geophysical Institute, RCAES, Sopron, Hungary
+%   Developed by Gabor Facsko (facsko.gabor@wigner.hu), 2014-2021
+%   Wigner Research Centre for Physics, Budapest, Hungary
 %----------------------------------------------------------------------
 %
     % Initialisation
@@ -93,7 +94,7 @@ function [ corrFilename, Nrow ] = mkCorrTempFile(tStart,tEnd,isOMNI,isBz,strSuff
         ib=1;
         ia=1;
         while (ib<numel(B(:,1)) && ia<numel(A(:,1)))
-            B(ib,:)=A(ia,:);
+            B(ib,:)=A(ia,:);                     
             % Step size
             dib=round((A(ia+1,1)-A(ia,1))*1440);           
             % Fill the subintervall
