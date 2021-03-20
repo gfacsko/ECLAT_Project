@@ -519,7 +519,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),barWidth*cBarWidth,...
         'FaceColor','r','EdgeColor','r');  
     hold off;
-    title('\fontsize{10}P from OMNIWeb');
+    title('\rm\fontsize{10}P from OMNIWeb');
     ylabel('\fontsize{10}B_{z}');
     text(0.05,0.9,'(a)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
@@ -536,7 +536,7 @@ function [ error ] = plotOMNIHistograms(strSuffix)
     bar(Svc+2.5,floor(Snc/sum(Snc)*100),barWidth*cBarWidth,...
         'FaceColor','r','EdgeColor','r');  
     hold off;
-    title('\fontsize{10}P from OMNIWeb');
+    title('\rm\fontsize{10}P from OMNIWeb');
     ylabel('\fontsize{10}V_{x}');
     text(0.05,0.9,'(b)','Units','Normalized');
     set(gca,'YLim',[0 100],'Layer','top');
