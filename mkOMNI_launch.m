@@ -160,7 +160,7 @@ function [ error ] = mkOMNI_launch(strSuffix)
         ylabel('\fontsize{8}V_x, V_y, V_z [km/s]');
         text(0.0125,0.9,'\fontsize{8}(b)','Units','Normalized');
 
-        % p plot
+        % P plot
         subplot(3,1,3);    
         plot(A(iLowOMNI:iHighOMNI,1),A(iLowOMNI:iHighOMNI,11),'-k');           
         datetick('x','HH:MM');   
@@ -189,7 +189,7 @@ function [ error ] = mkOMNI_launch(strSuffix)
         end;   
         xlabel('\fontsize{8}Time [HH:MM]');
 %         ylabel('n [cm^{-3}]');    
-        ylabel('\fontsize{8}p [nPa]'); 
+        ylabel('\fontsize{8}P [nPa]'); 
         text(0.0125,0.9,'\fontsize{8}(c)','Units','Normalized');
         
         % Saving result in an eps file

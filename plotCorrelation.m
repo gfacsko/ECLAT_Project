@@ -145,7 +145,13 @@ subplot(1,3,1);
 %    subplot(2,3,5);
  subplot(1,3,2);
     plot(A(:,3),A(:,6),'.k','MarkerSize',2);
-    if (strcmp(strSuffix,'-sw')),axis([-800 -200 -800 -200]);end; % SW
+    if (strcmp(strSuffix,'-sw')), % SW
+        axis([-800 -200 -800 -200]);
+        set(gca,'XTick',-800:200:600);
+        set(gca,'XTickLabel',{'-800','-600','-400','-200','0','200'});
+        set(gca,'YTick',-800:200:600);
+        set(gca,'YTickLabel',{'-800','-600','-400','-200','0','200'});
+    end;
     if (strcmp(strSuffix,'-msh')) % MSH
         axis([-600 200 -600 200]);
         set(gca,'XTick',-600:200:600);
